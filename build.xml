@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<project name="Hello" default="compile" basedir=".">
+
+    <property name="src.dir" value="${basedir}/src" />
+    <property name="bin.dir" value="${basedir}/bin" />
+    <property name="jar.dir" value="${basedir}/jar" />
+    <property name="test.src.dir" value="${basedir}/test/src" />
+    <property name="test.bin.dir" value="${basedir}/test/bin" />
+<property name="user.name" value="ssik" />
+<property name="main.class" value="HelloWorld" />
+
+<target name="compile" depends="mkdir">
+    <javac srcdir="${src.dir}" destdir="${bin.dir}"
+        includes="**/*.java" excludes="**/*.class" 
+        classpath="${bin.dir}"/>
+    
+</target>
+
+<path id="project.classpath" >
+    <pathelement location="${bin.dir}" />
+    <pathelement location="${test.bin.dir}" />
+</path>
+
+<target name="compile-tests" depends="compile">
+    <javac srcdir="${test.src.dir}" destdir="${test.bin.dir}">
+        <classpath refid="project.classpath" /> 
+    </javac>
+</target>
+<target name="test" depends="compile-tests">
+    <junit printsummary="on" haltonfailure="yes"> 
+        <formatter type="brief" usefile="false" /> 
+        <classpath refid="project.classpath"/>
+        <batchtest>
+            <fileset dir="${test.bin.dir}"
+                includes="**/*Test.class" />
+        </batchtest>
+    </junit>
+</target>
+<target name="jar" depends="compile">
+    <jar jarfile="${jar.dir}/hello.jar"
+        basedir="${bin.dir}" includes="**/*.class" 
+        excludes="**/*.java" compress="true"
+        index="true" manifest="${src.dir}/MANIFEST.MF">
+        <fileset dir="${bin.dir}"/>
+    </jar> 
+ </target>
+
+ <target name="manifest" depends="compile" >
+     <manifest file="${src.dir}/MANIFEST.MF">
+         <attribute name="Built-By" value="${user.name}" />
+         <attribute name="Main-Class" value="${main.class}" />
+     </manifest>
+ </target>
+
+<target name="mkdir" depends="clean">
+      <mkdir dir="${bin.dir}" />
+      <mkdir dir="${jar.dir}" /> 
+      <mkdir dir="${test.bin.dir}" />
+  </target>
+
+  <target name="clean" >
+      <delete dir="${bin.dir}" />
+      <delete dir="${jar.dir}" />
+      <delete dir="${test.bin.dir}" />
+  </target>
+</project>
