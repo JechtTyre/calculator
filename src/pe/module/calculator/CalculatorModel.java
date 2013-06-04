@@ -89,63 +89,32 @@ class CalculatorModel {
 		return result;
 	}
 	
-	String Postfixiter(Stack<Character> OperatorStack, int index, String postfix, String normalfix) {
-		
-		if(index == normalfix.length()) return postfix;
-		else if(isNumber(normalfix.charAt(index))) {
-			postfix += normalfix.charAt(index);
-			postfix += " ";
-		}
-		else if(isOperator(normalfix.charAt(index))) {
-			if(OperatorStack.isEmpty() == false) {
-				postfix += " " + OperatorStack.pop().toString() + " ";				
-			}
-			
-			OperatorStack.push(normalfix.charAt(index));
-		}
-			
-		return Postfixiter(OperatorStack, index + 1, postfix, normalfix);
-	}
 	String changePostfix(String value) {
 		Stack<Character> OperatorStack = new Stack<Character>();
 		String postfix = "";
 		
-		Character character;
-		Character NextChar = null;
+		Character character;		
 		for(int i = 0; i < value.length(); i++) {
 			
 			character = value.charAt(i);			
 			
 			if(isNumber(character)) {	
 				
-				if(i + 1 < value.length()) {
-					NextChar = value.charAt(i + 1);
-				} else {
-					NextChar = null;
-				}
-				
-				postfix += character;
-				
-				if(NextChar != null && isNumber(NextChar)) {					
-					continue;					
-				} else {
-					postfix += " ";					
-				}
+				postfix += character;			
 			}
 			
 			if(isOperator(character) || i == value.length() -1) {
+				postfix += " ";	
 				
 				if(OperatorStack.isEmpty() == false) {
-					postfix += OperatorStack.pop().toString();
-					
-					if(i + 1 < value.length()) {
-						postfix += " ";
-					}
+					postfix += OperatorStack.pop().toString() + " ";					
 				}
-				OperatorStack.push(character);
 				
-			}						
+				OperatorStack.push(character);				
+			}	
+			
+			
 		}
-		return postfix;// Postfixiter(OperatorStack, 0, postfix, value);
+		return postfix;
 	}
 }
