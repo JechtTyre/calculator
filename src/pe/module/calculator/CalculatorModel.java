@@ -68,6 +68,33 @@ class CalculatorModel {
 		return result;
 	}
 	
+	String postfixIter(Stack<Character> OperatorStack, int index, String postfix, String value) {		
+		
+		if(index == value.length()) {
+			if(OperatorStack.isEmpty() == false) {
+				if(Character.valueOf(postfix.charAt(postfix.length() - 1)).equals(' ') == false) {
+					postfix += " ";
+				} 
+				
+				postfix += OperatorStack.pop().toString();
+			}
+			
+			return postfix;
+		}
+		
+		if(isOperator(value.charAt(index))) {
+			postfix += " ";
+			if(OperatorStack.isEmpty() == false) {
+				postfix += OperatorStack.pop().toString() + " ";				
+			}
+			OperatorStack.push(value.charAt(index));			
+		} 
+		else if(isNumber(value.charAt(index))){
+			postfix += value.charAt(index);
+		}
+		
+		return postfixIter(OperatorStack, index + 1, postfix, value);		
+	}
 	int calculate(String postfixed) {	
 		
 		int result = 0;
@@ -91,30 +118,7 @@ class CalculatorModel {
 	
 	String changePostfix(String value) {
 		Stack<Character> OperatorStack = new Stack<Character>();
-		String postfix = "";
-		
-		Character character;		
-		for(int i = 0; i < value.length(); i++) {
-			
-			character = value.charAt(i);			
-			
-			if(isNumber(character)) {	
 				
-				postfix += character;			
-			}
-			
-			if(isOperator(character) || i == value.length() -1) {
-				postfix += " ";	
-				
-				if(OperatorStack.isEmpty() == false) {
-					postfix += OperatorStack.pop().toString() + " ";					
-				}
-				
-				OperatorStack.push(character);				
-			}	
-			
-			
-		}
-		return postfix;
+		return postfixIter(OperatorStack, 0, "", value);
 	}
 }

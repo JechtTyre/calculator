@@ -2,6 +2,8 @@ package pe.module.calculator;
 
 import static org.junit.Assert.*;
 
+import java.util.Stack;
+
 import org.junit.Test;
 
 
@@ -31,6 +33,11 @@ public class CalculatorTest {
 		assertEquals(2, calculator.devide(6,3));
 	}
 	
+	@Test
+	public void reflectionpostfix() {
+		Stack<Character> OperatorStack = new Stack<Character>();
+		assertEquals("20 +", calculator.postfixIter(OperatorStack, 0, "", "20+"));
+	}
 	@Test
 	public void calculateplus() {
 		String postfix = calculator.changePostfix("1+2");
@@ -63,55 +70,53 @@ public class CalculatorTest {
 		assertEquals(2, result);
 	}
 	
-	
-	
 	@Test
 	public void changepostfixplus() {
 		
 		String changed = calculator.changePostfix("1+2");
-		assertEquals("1 2 + ", changed);	
+		assertEquals("1 2 +", changed);	
 	}
 	
 	@Test
 	public void change10Numberpostfix() {
 		String changed = calculator.changePostfix("10+20");
-		assertEquals("10 20 + ", changed);
+		assertEquals("10 20 +", changed);
 	}	
 	
 	@Test
 	public void change3digitpostfix() {
 		String changed = calculator.changePostfix("100+200");
-		assertEquals("100 200 + ", changed);
+		assertEquals("100 200 +", changed);
 	}
 	@Test
 	public void changepostfixdoubleplus() {
 		String changed = calculator.changePostfix("1+2+3");
-		assertEquals("1 2 + 3 + ", changed);		
+		assertEquals("1 2 + 3 +", changed);		
 	}
 	
 	@Test
 	public void change2digitpostfixdoubleplus() {
 		String changed = calculator.changePostfix("10+20+30");
-		assertEquals("10 20 + 30 + ", changed);		
+		assertEquals("10 20 + 30 +", changed);		
 	}
 	@Test
 	public void changepostfixminus() {
 		
 		String changed = calculator.changePostfix("1-2");
-		assertEquals("1 2 - ", changed);		
+		assertEquals("1 2 -", changed);		
 	}
 	
 	@Test
 	public void changepostfixmultiple() {
 		
 		String changed = calculator.changePostfix("1*2");
-		assertEquals("1 2 * ", changed);		
+		assertEquals("1 2 *", changed);		
 	}
 	
 	@Test
 	public void changepostfixdivide() {
 		
 		String changed = calculator.changePostfix("1/2");
-		assertEquals("1 2 / ", changed);		
+		assertEquals("1 2 /", changed);		
 	}
 }
