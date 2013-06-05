@@ -34,15 +34,32 @@ public class CalculatorTest {
 	}
 	
 	@Test
-	public void reflectionpostfix() {
-		Stack<Character> OperatorStack = new Stack<Character>();
-		assertEquals("20 +", calculator.postfixIter(OperatorStack, 0, "", "20+"));
-	}
-	@Test
 	public void calculateplus() {
 		String postfix = calculator.changePostfix("1+2");
 		int result = calculator.calculate(postfix);
-		assertEquals(3, result);		
+		assertEquals(3, result);
+	}
+	
+	
+	@Test
+	public void calculate2digitNumberplus() {
+		String postfix = calculator.changePostfix("10+20");
+		int result = calculator.calculate(postfix);
+		assertEquals(30, result);
+	}
+	
+	@Test
+	public void calculate2digitNumberplus_002() {
+		String postfix = calculator.changePostfix("10+20+30");
+		int result = calculator.calculate(postfix);
+		assertEquals(60, result);
+	}
+	
+	@Test
+	public void calculate3digitdoubleNumberplus() {
+		String postfix = calculator.changePostfix("100+200");
+		int result = calculator.calculate(postfix);
+		assertEquals(300, result);
 	}
 	
 	@Test
