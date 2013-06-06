@@ -95,6 +95,12 @@ public class CalculatorTest {
 	}
 	
 	@Test
+	public void changepostfixplus_002() {
+		String changed = calculator.changePostfix("1.0+2.0");
+		assertEquals("1.0 2.0 +", changed);
+	}
+	
+	@Test
 	public void change10Numberpostfix() {
 		String changed = calculator.changePostfix("10+20");
 		assertEquals("10 20 +", changed);
