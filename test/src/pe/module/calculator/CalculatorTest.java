@@ -33,113 +33,99 @@ public class CalculatorTest {
 		assertEquals(2, calculator.devide(6,3));
 	}
 	
+	private void assertCalculate(String modify, int result) {
+		
+		String postfix = calculator.changePostfix(modify);
+		int value = calculator.calculate(postfix);
+		assertEquals(result, value);
+	}
 	@Test
 	public void calculateplus() {
-		String postfix = calculator.changePostfix("1+2");
-		int result = calculator.calculate(postfix);
-		assertEquals(3, result);
+		
+		assertCalculate("1+2", 3);
 	}
 	
 	
 	@Test
 	public void calculate2digitNumberplus() {
-		String postfix = calculator.changePostfix("10+20");
-		int result = calculator.calculate(postfix);
-		assertEquals(30, result);
+		
+		assertCalculate("10+20", 30);
 	}
 	
 	@Test
 	public void calculate2digitNumberplus_002() {
-		String postfix = calculator.changePostfix("10+20+30");
-		int result = calculator.calculate(postfix);
-		assertEquals(60, result);
+		assertCalculate("10+20+30", 60);
 	}
 	
 	@Test
 	public void calculate3digitdoubleNumberplus() {
-		String postfix = calculator.changePostfix("100+200");
-		int result = calculator.calculate(postfix);
-		assertEquals(300, result);
+		
+		assertCalculate("100+200", 300);
 	}
 	
 	@Test
 	public void calculateminus() {
-		String postfix = calculator.changePostfix("2-1");
-		int result = calculator.calculate(postfix);
-		assertEquals(1, result);
 		
-		postfix = calculator.changePostfix("1-2");
-		result = calculator.calculate(postfix);
-		assertEquals(-1, result);
+		assertCalculate("2-1", 1);
+		assertCalculate("1-2", -1);
 	}
 	
 	@Test
 	public void calculatemultiple() {
-		String postfix = calculator.changePostfix("2*4");
-		int result = calculator.calculate(postfix);
-		assertEquals(8, result);
+		
+		assertCalculate("2*4", 8);
 	}
 	
 	@Test
 	public void calculatdivide() {
-		String postfix = calculator.changePostfix("4/2");
-		int result = calculator.calculate(postfix);		
-		assertEquals(2, result);
+		assertCalculate("4/2", 2);
 	}
 	
+	private void assertPostfix(String normalfix, String postfix) {
+		String changed = calculator.changePostfix(normalfix);
+		assertEquals(postfix, changed);
+	}
 	@Test
 	public void changepostfixplus() {
-		
-		String changed = calculator.changePostfix("1+2");
-		assertEquals("1 2 +", changed);	
+		assertPostfix("1+2", "1 2 +");
 	}
 	
 	@Test
 	public void changepostfixplus_002() {
-		String changed = calculator.changePostfix("1.0+2.0");
-		assertEquals("1.0 2.0 +", changed);
+		assertPostfix("1.0+2.0", "1.0 2.0 +");
 	}
 	
 	@Test
 	public void change10Numberpostfix() {
-		String changed = calculator.changePostfix("10+20");
-		assertEquals("10 20 +", changed);
+		assertPostfix("10+20", "10 20 +");
 	}	
 	
 	@Test
 	public void change3digitpostfix() {
-		String changed = calculator.changePostfix("100+200");
-		assertEquals("100 200 +", changed);
+		assertPostfix("100+200", "100 200 +");
 	}
+	
 	@Test
 	public void changepostfixdoubleplus() {
-		String changed = calculator.changePostfix("1+2+3");
-		assertEquals("1 2 + 3 +", changed);		
+		assertPostfix("1+2+3", "1 2 + 3 +");
 	}
 	
 	@Test
 	public void change2digitpostfixdoubleplus() {
-		String changed = calculator.changePostfix("10+20+30");
-		assertEquals("10 20 + 30 +", changed);		
+		assertPostfix("10+20+30", "10 20 + 30 +");
 	}
 	@Test
 	public void changepostfixminus() {
-		
-		String changed = calculator.changePostfix("1-2");
-		assertEquals("1 2 -", changed);		
+		assertPostfix("1-2", "1 2 -");
 	}
 	
 	@Test
 	public void changepostfixmultiple() {
-		
-		String changed = calculator.changePostfix("1*2");
-		assertEquals("1 2 *", changed);		
+		assertPostfix("1*2", "1 2 *");
 	}
 	
 	@Test
 	public void changepostfixdivide() {
-		
-		String changed = calculator.changePostfix("1/2");
-		assertEquals("1 2 /", changed);		
+		assertPostfix("1/2", "1 2 /");
 	}
 }
