@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<project name="Hello" default="compile" basedir=".">
+<project name="Hello" default="jar" basedir=".">
 
     <property name="src.dir" value="${basedir}/src" />
     <property name="bin.dir" value="${basedir}/bin" />
     <property name="jar.dir" value="${basedir}/jar" />
+    <property name="junit.dir" value="${basedir}/test/lib" />
     <property name="test.src.dir" value="${basedir}/test/src" />
     <property name="test.bin.dir" value="${basedir}/test/bin" />
 <property name="user.name" value="ssik" />
@@ -12,17 +13,21 @@
 <target name="compile" depends="mkdir">
     <javac srcdir="${src.dir}" destdir="${bin.dir}"
         includes="**/*.java" excludes="**/*.class" 
-        classpath="${bin.dir}"/>
+        classpath="${bin.dir}" includeantruntime="false"/>
     
 </target>
 
 <path id="project.classpath" >
     <pathelement location="${bin.dir}" />
     <pathelement location="${test.bin.dir}" />
+    <fileset dir="${junit.dir}" >
+        <include name="*.jar" />
+    </fileset>
 </path>
 
 <target name="compile-tests" depends="compile">
-    <javac srcdir="${test.src.dir}" destdir="${test.bin.dir}">
+    <javac srcdir="${test.src.dir}" destdir="${test.bin.dir}"
+           includeantruntime="false">
         <classpath refid="project.classpath" /> 
     </javac>
 </target>
@@ -36,7 +41,7 @@
         </batchtest>
     </junit>
 </target>
-<target name="jar" depends="compile">
+<target name="jar" depends="manifest">
     <jar jarfile="${jar.dir}/hello.jar"
         basedir="${bin.dir}" includes="**/*.class" 
         excludes="**/*.java" compress="true"
@@ -45,14 +50,14 @@
     </jar> 
  </target>
 
- <target name="manifest" depends="compile" >
+ <target name="manifest" depends="test" >
      <manifest file="${src.dir}/MANIFEST.MF">
          <attribute name="Built-By" value="${user.name}" />
          <attribute name="Main-Class" value="${main.class}" />
      </manifest>
  </target>
 
-<target name="mkdir" depends="clean">
+<target name="mkdir" >
       <mkdir dir="${bin.dir}" />
       <mkdir dir="${jar.dir}" /> 
       <mkdir dir="${test.bin.dir}" />
