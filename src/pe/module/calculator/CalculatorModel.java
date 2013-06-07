@@ -22,50 +22,28 @@ class CalculatorModel {
 		return false;		
 	}
 	
-	int devide(int a, int b) {
-		return a / b;
-	}
-	
-	int mult(int a, int b) {
-		return a * b;
-	}
-	
-	int minus(int a, int b) {
-		return a - b;
-	}
-	double minus(int a, double b) {
-		return a - b;
-	}
-	
-	int plus(int a, int b) {
-		return a + b;	
-	}
-	
-	double plus(double a, double b) {
-		return a + b;
-	}
-	
 	private int result(char value, int first, int second) {
 		
-		int result = 0;
+		Number result = null;
+		Number nfirst = new Number(first);
 		
 		if(value == '+') {
-			result = plus(first, second);
+			result = nfirst.plus(second);
 		}
 		else if(value == '-') {
 			
-			result = minus(first, second);
+			result = nfirst.minus(second);
 		}
 		
 		else if(value == '*') {
-			result = mult(first, second);
+			result = nfirst.mult(second);
 		}
 		
 		else if(value == '/') {
-			result = devide(first, second);
+			result = nfirst.devide(second);
 		}
 		
-		return result;
+		return result.number;
 	}
 	
 	private int getResult(char operator, Stack<Integer> NumberStack) {
@@ -97,6 +75,8 @@ class CalculatorModel {
 			OperatorStack.push(value.charAt(index));			
 		} 
 		else if(isNumber(value.charAt(index))){
+			postfix += value.charAt(index);
+		} else if(value.charAt(index) == '.') {
 			postfix += value.charAt(index);
 		}
 		

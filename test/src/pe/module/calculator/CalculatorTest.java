@@ -9,30 +9,7 @@ import org.junit.Test;
 
 public class CalculatorTest {
 	CalculatorModel calculator = new CalculatorModel();
-	@Test
-	public void plus() {		
 		
-		assertEquals(8, calculator.plus(3,5));
-		assertEquals(0.5, calculator.plus(0.2, 0.3), 0);
-	}
-	
-	@Test
-	public void minus() {
-				
-		assertEquals(-2, calculator.minus(3,5), 0);
-		assertEquals(-2.5, calculator.minus(-5, -2.5), 0);
-	}
-	
-	@Test
-	public void mult() {
-		assertEquals(15, calculator.mult(3,5));
-	}
-	
-	@Test
-	public void devide() {
-		assertEquals(2, calculator.devide(6,3));
-	}
-	
 	private void assertCalculate(String modify, int result) {
 		
 		String postfix = calculator.changePostfix(modify);
@@ -44,6 +21,14 @@ public class CalculatorTest {
 		
 		assertCalculate("1+2", 3);
 	}
+	
+	/*@Test
+	public void calculateplus_002() {
+		
+		String postfix = calculator.changePostfix("1.0+2.0");
+		int value = calculator.calculate(postfix);
+		assertEquals(3.0, value, 0);
+	}*/
 	
 	
 	@Test
