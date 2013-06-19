@@ -1,5 +1,5 @@
 package pe.module.calculator;
 
-public class CalculatorPrjTest {
+public class TestCalculatorPrj {
 
 }

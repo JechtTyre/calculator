@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 
-public class CalculatorTest extends CalculatorPrjTest {
+public class CalculatorTest extends TestCalculatorPrj {
 	
 	CalculatorModel calculator = new CalculatorModel();
 		

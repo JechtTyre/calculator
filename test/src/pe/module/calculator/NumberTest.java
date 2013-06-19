@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class NumberTest extends CalculatorPrjTest {
+public class NumberTest extends TestCalculatorPrj {
 	
 	@Test
 	public void setNumberPlus() {
