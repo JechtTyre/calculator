@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class NumberTest {
+public class NumberTest extends CalculatorPrjTest {
 	
 	@Test
 	public void setNumberPlus() {
 		Number five = new Number(5);
-		Number ten = five.plus(5);
+		Number ten = five.plus(new Number(5));
 		
 		assertEquals(new Number(10), ten);		
 	}
@@ -17,7 +17,7 @@ public class NumberTest {
 	@Test
 	public void setNumberMinus() {
 		Number five = new Number(5);
-		Number zero = five.minus(5);
+		Number zero = five.minus(new Number(5));
 		
 		assertEquals(new Number(0), zero);		
 	}
@@ -25,7 +25,7 @@ public class NumberTest {
 	@Test
 	public void setNumberMultiple() {
 		Number five = new Number(5);
-		Number result = five.mult(5);
+		Number result = five.mult(new Number(5));
 		
 		assertEquals(new Number(25), result);		
 	}
@@ -33,7 +33,7 @@ public class NumberTest {
 	@Test
 	public void setNumberDevide() {
 		Number ten = new Number(10);
-		Number two = ten.devide(5);
+		Number two = ten.devide(new Number(5));
 		
 		assertEquals(new Number(2), two);		
 	}

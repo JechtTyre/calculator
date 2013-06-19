@@ -2,25 +2,32 @@ package pe.module.calculator;
 
 public class Number {
 	
-	public int number = 0;
+	private int number = 0;
 	
 	public Number(int number) {
 		this.number = number;
 	}
 	
-	Number devide(int b) {
-		return new Number(this.number / b);
+	public Number(Number number) {
+		this.number = number.number;
 	}
 	
-	Number mult(int b) {
-		return new Number(this.number * b);
+	boolean morethan(Number compareNum) {
+		return number > compareNum.number;
+	}
+	Number devide(Number b) {
+		return new Number(this.number / b.number);
 	}
 	
-	Number minus(int b) {
-		return new Number(this.number - b);
+	Number mult(Number b) {
+		return new Number(this.number * b.number);
 	}
-	Number plus(int b) {
-		return new Number(this.number + b);	
+	
+	Number minus(Number b) {
+		return new Number(this.number - b.number);
+	}
+	Number plus(Number b) {
+		return new Number(this.number + b.number);	
 	}
 	
 	@Override

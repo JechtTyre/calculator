@@ -1,20 +1,19 @@
 package pe.module.calculator;
 
-import static org.junit.Assert.*;
-
-import java.util.Stack;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 
-public class CalculatorTest {
+public class CalculatorTest extends CalculatorPrjTest {
+	
 	CalculatorModel calculator = new CalculatorModel();
 		
 	private void assertCalculate(String modify, int result) {
 		
 		String postfix = calculator.changePostfix(modify);
-		int value = calculator.calculate(postfix);
-		assertEquals(result, value);
+		Number value = calculator.calculate(postfix);
+		assertEquals(new Number(result), value);
 	}
 	@Test
 	public void calculateplus() {
