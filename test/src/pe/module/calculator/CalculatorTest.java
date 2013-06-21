@@ -12,8 +12,8 @@ public class CalculatorTest extends TestCalculatorPrj {
 	private void assertCalculate(String modify, int result) {
 		
 		String postfix = calculator.changePostfix(modify);
-		Number value = calculator.calculate(postfix);
-		assertEquals(new Number(result), value);
+		MyInteger value = calculator.calculate(postfix);
+		assertEquals(new MyInteger(result), value);
 	}
 	@Test
 	public void calculateplus() {

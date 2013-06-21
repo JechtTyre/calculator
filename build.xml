@@ -37,7 +37,7 @@
         <classpath refid="project.classpath"/>
         <batchtest>
             <fileset dir="${test.bin.dir}"
-                includes="**/*Test.class" />
+                includes="**/AllTests.class" />
         </batchtest>
     </junit>
 </target>

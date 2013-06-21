@@ -22,10 +22,10 @@ class CalculatorModel {
 		return false;		
 	}
 	
-	private Number result(char value, Number first, Number second) {
+	private MyInteger result(char value, MyInteger first, MyInteger second) {
 		
-		Number result = null;
-		Number nfirst = new Number(first);
+		MyInteger result = null;
+		MyInteger nfirst = new MyInteger(first);
 		
 		if(value == '+') {
 			result = nfirst.plus(second);
@@ -46,9 +46,9 @@ class CalculatorModel {
 		return result;
 	}
 	
-	private Number getResult(char operator, Stack<Number> NumberStack) {
-		Number second = NumberStack.pop();
-		Number first = NumberStack.pop();
+	private MyInteger getResult(char operator, Stack<MyInteger> NumberStack) {
+		MyInteger second = NumberStack.pop();
+		MyInteger first = NumberStack.pop();
 		
 		return result(operator, first, second);
 	}
@@ -83,7 +83,7 @@ class CalculatorModel {
 		return postfixIter(OperatorStack, index + 1, postfix, value);		
 	}
 	
-	private Number calculateIter(Stack<Number> NumberStack, Number result, int index, String postfixed) {
+	private MyInteger calculateIter(Stack<MyInteger> NumberStack, MyInteger result, int index, String postfixed) {
 		
 		if(index == postfixed.length()) {
 			
@@ -95,17 +95,17 @@ class CalculatorModel {
 		
 		if(postfixed.charAt(index) == ' ') {
 			NumberStack.push(result);
-			result = new Number(0);
+			result = new MyInteger(0);
 		}
 		
 		else if(isNumber(postfixed.charAt(index))) {
 						
-			if(result.morethan(new Number(0))) {
-				result = result.mult(new Number(10));
+			if(result.morethan(new MyInteger(0))) {
+				result = result.mult(new MyInteger(10));
 			}
 			
 			int parseInt = Integer.parseInt(Character.toString(postfixed.charAt(index)));
-			result = result.plus(new Number(parseInt));
+			result = result.plus(new MyInteger(parseInt));
 		}
 		else if(isOperator(postfixed.charAt(index))) {
 			result = getResult(postfixed.charAt(index), NumberStack);						
@@ -114,11 +114,11 @@ class CalculatorModel {
 		return calculateIter(NumberStack, result, index + 1, postfixed);
 	}
 	
-	Number calculate(String postfixed) {
+	MyInteger calculate(String postfixed) {
 		
-		Stack<Number> NumberStack = new Stack<Number>();
+		Stack<MyInteger> NumberStack = new Stack<MyInteger>();
 		
-		return calculateIter(NumberStack, new Number(0) ,0, postfixed);
+		return calculateIter(NumberStack, new MyInteger(0) ,0, postfixed);
 	}
 	
 	String changePostfix(String value) {
